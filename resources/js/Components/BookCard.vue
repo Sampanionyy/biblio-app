@@ -1,45 +1,45 @@
 <script setup>
-import { computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
+    import { computed } from 'vue';
+    import { Link } from '@inertiajs/vue3';
 
-const props = defineProps({
-    book: {
-        type: Object,
-        required: true,
-        validator: (book) => book && book.id && book.name
-    }
-});
+    const props = defineProps({
+        book: {
+            type: Object,
+            required: true,
+            validator: (book) => book && book.id && book.name
+        }
+    });
 
-const bookUrl = computed(() => `/books/${props.book.id}`);
+    const bookUrl = computed(() => `/books/${props.book.id}`);
 
-const cardClasses = `
-    group relative bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 
-    hover:border-slate-300/80 hover:bg-white/90 hover:shadow-xl hover:shadow-slate-200/60
-    hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer
-`;
+    const cardClasses = `
+        group relative bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 
+        hover:border-slate-300/80 hover:bg-white/90 hover:shadow-xl hover:shadow-slate-200/60
+        hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer
+    `;
 
-const gradientClasses = `
-    absolute inset-0 bg-gradient-to-br from-blue-50/40 via-slate-50/40 to-transparent 
-    opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl
-`;
+    const gradientClasses = `
+        absolute inset-0 bg-gradient-to-br from-blue-50/40 via-slate-50/40 to-transparent 
+        opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl
+    `;
 
-const iconWrapperClasses = `
-    mb-5 w-12 h-12 bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl 
-    flex items-center justify-center group-hover:from-blue-200 group-hover:to-slate-300
-    transition-all duration-300 shadow-md group-hover:shadow-lg
-`;
+    const iconWrapperClasses = `
+        mb-5 w-12 h-12 bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl 
+        flex items-center justify-center group-hover:from-blue-200 group-hover:to-slate-300
+        transition-all duration-300 shadow-md group-hover:shadow-lg
+    `;
 
-const titleClasses = `
-    text-slate-700 font-medium text-lg leading-relaxed mb-2
-    group-hover:text-slate-800 transition-colors duration-300
-`;
+    const titleClasses = `
+        text-slate-700 font-medium text-lg leading-relaxed mb-2
+        group-hover:text-slate-800 transition-colors duration-300
+    `;
 
-const badgeClasses = 'px-2 py-1 bg-slate-100/60 rounded-md text-xs font-medium';
+    const badgeClasses = 'px-2 py-1 bg-slate-100/60 rounded-md text-xs font-medium';
 
-const ctaClasses = `
-    flex items-center text-slate-400 group-hover:text-slate-600 
-    transition-colors duration-300
-`;
+    const ctaClasses = `
+        flex items-center text-slate-400 group-hover:text-slate-600 
+        transition-colors duration-300
+    `;
 </script>
 
 <template>
