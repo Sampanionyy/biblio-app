@@ -2,7 +2,7 @@
     import { computed } from 'vue';
     import { Link } from '@inertiajs/vue3';
     import Layout from '../../Components/Layout.vue';
-    import FooterActions from '@/Components/FooterActions.vue';
+    import FooterActions from '../../Components/FooterActions.vue';
 
     const props = defineProps({
         book: {
