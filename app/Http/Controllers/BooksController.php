@@ -2,80 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\BibleService;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Http;
 
 class BooksController extends Controller
 {
-    private $bibleId = "a93a92589195411f-01";
+    private BibleService $bibleService;
 
+    public function __construct(BibleService $bibleService)
+    {
+        $this->bibleService = $bibleService;
+    }
+
+    /** Liste des livres */
     public function index()
     {
-        $books = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/books");
-
+        $books = $this->bibleService->getBooks();
         return Inertia::render('Books/Index', [
-            'books' => $books->json()['data'] ?? []
-        ]); 
+            'books' => $books ?? []
+        ]);
     }
 
-    public function show($bookId)
+    /** Détails d'un livre + ses chapitres */
+    public function show(string $bookId)
     {
-        $book = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/books/{$bookId}");
-
-        $chapters = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/books/{$bookId}/chapters");
-
         return Inertia::render('Books/Show', [
-            'book' => $book->json()['data'] ?? null,
-            'chapters' => $chapters->json()['data'] ?? []
+            'book' => $this->bibleService->getBook($bookId),
+            'chapters' => $this->bibleService->getChapters($bookId) ?? []
         ]);
     }
 
-    public function chapter($bookId, $chapterId)
+    /** Détails d'un chapitre + ses versets */
+    public function chapter(string $bookId, string $chapterId)
     {
-        $book = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/books/{$bookId}");
-
-        $chapter = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/chapters/{$chapterId}");
-
-        $verses = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/chapters/{$chapterId}/verses");
-
         return Inertia::render('Books/Chapter', [
-            'book' => $book->json()['data'] ?? null,
-            'chapter' => $chapter->json()['data'] ?? null,
-            'verses' => $verses->json()['data'] ?? []
+            'book' => $this->bibleService->getBook($bookId),
+            'chapter' => $this->bibleService->getChapter($chapterId),
+            'verses' => $this->bibleService->getVerses($chapterId) ?? []
         ]);
     }
 
-    public function verse($bookId, $chapterId, $verseId)
+    /** Détails d'un verset précis */
+    public function verse(string $bookId, string $chapterId, string $verseId)
     {
-        $book = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/books/{$bookId}");
-
-        $chapter = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/chapters/{$chapterId}");
-
-        $verse = Http::withHeaders([
-            'api-key' => env('BIBLE_API_KEY')
-        ])->get("https://api.scripture.api.bible/v1/bibles/{$this->bibleId}/verses/{$verseId}");
-
         return Inertia::render('Books/Verse', [
-            'book' => $book->json()['data'] ?? null,
-            'chapter' => $chapter->json()['data'] ?? null,
-            'verse' => $verse->json()['data'] ?? null
+            'book' => $this->bibleService->getBook($bookId),
+            'chapter' => $this->bibleService->getChapter($chapterId),
+            'verse' => $this->bibleService->getVerse($verseId)
         ]);
     }
 }
