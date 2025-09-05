@@ -4,8 +4,12 @@
     import FooterActions from '../../Components/FooterActions.vue';
     import { toast } from 'vue-sonner'
     import { format } from "date-fns"
-    const currentDate = format(new Date(), "EEEE, MMMM dd, yyyy 'at' hh:mm a")
+    import { fr } from 'date-fns/locale';
 
+    const currentDate = format(new Date(), "EEEE dd MMMM yyyy 'à' HH:mm", {
+        locale: fr,
+    });
+    
     const cleanContent = (html) => {
         return html
             .replace(/<[^>]+>/g, '')   

@@ -1,6 +1,7 @@
 <script setup>
     import { defineProps, defineSlots } from 'vue';
     import { Link } from '@inertiajs/vue3';
+    import { Head } from '@inertiajs/vue3';
     import { Toaster } from '@/components/ui/sonner'
     import 'vue-sonner/style.css'
     
@@ -31,6 +32,7 @@
 </script>
 
 <template>
+    <Head :title="`Bible/${title}`" />
     <div class="min-h-screen bg-gray-50">
         <header class="bg-white border-b border-gray-200 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

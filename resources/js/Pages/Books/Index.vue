@@ -1,9 +1,9 @@
 <script setup>
     import { computed, shallowRef } from 'vue';
-    import Layout from '../../Components/Layout.vue';
-    import FooterActions from '../../Components/FooterActions.vue';
-    import BookCard from '../../Components/BookCard.vue';
-    import EmptyState from '../../Components/EmptyState.vue';
+    import Layout from '@/Components/Layout.vue';
+    import FooterActions from '@/Components/FooterActions.vue';
+    import BookCard from '@/Components/BookCard.vue';
+    import EmptyState from '@/Components/EmptyState.vue';
 
     const props = defineProps({
         books: {
