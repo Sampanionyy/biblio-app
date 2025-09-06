@@ -4,6 +4,7 @@
     import FooterActions from '@/Components/FooterActions.vue';
     import BookCard from '@/Components/BookCard.vue';
     import EmptyState from '@/Components/EmptyState.vue';
+    import { router } from '@inertiajs/vue3';
 
     const props = defineProps({
         books: {
@@ -23,23 +24,14 @@
 
     const footerActions = computed(() => [
         {
-            key: 'global-search',
-            label: 'Recherche globale',
+            label: 'Rechercher',
             svgIcon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
-            variant: 'default',
-            onClick: handleGlobalSearch
+            onClick: () => router.visit("/search"),        
         }
     ]);
 
     const navigation = {};
-
     const gridClasses = 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6';
-
-    function handleGlobalSearch() {
-        // Action de recherche globale
-        console.log('Recherche globale déclenchée');
-    }
-
     const showActions = computed(() => props.books.length > 0 && !props.loading);
 
     const layoutProps = computed(() => ({

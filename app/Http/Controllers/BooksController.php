@@ -51,4 +51,15 @@ class BooksController extends Controller
             'verse' => $this->bibleService->getVerse($verseId)
         ]);
     }
+   
+    public function search($bookId = null)
+    {
+        $query = request()->query('query', '');
+        $results = $this->bibleService->searchVerses($query);
+
+        return Inertia::render('Books/Search', [
+            'query' => $query,
+            'results' => $results
+        ]);
+    }
 }

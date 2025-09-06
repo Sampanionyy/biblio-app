@@ -60,4 +60,9 @@ class BibleService
     public function getVerse(string $verseId){ 
         return $this->fetch("verses/{$verseId}"); 
     }
+    
+    public function searchVerses(string $query)
+    {        
+        return $this->fetch("search?query={$query}");
+    }
 }

@@ -12,3 +12,7 @@ Route::get('/books', [BooksController::class, 'index'])->name('books.index');
 Route::get('/books/{bookId}', [BooksController::class, 'show'])->name('books.show');
 Route::get('/books/{bookId}/chapters/{chapterId}', [BooksController::class, 'chapter'])->name('books.chapter');
 Route::get('/books/{bookId}/chapters/{chapterId}/verses/{verseId}', [BooksController::class, 'verse'])->name('books.verse');
+Route::get('/search', function () {
+    return Inertia::render('Books/Search');
+})->name('books.search');
+Route::get('search/results', [BooksController::class, 'search'])->name('books.search');
