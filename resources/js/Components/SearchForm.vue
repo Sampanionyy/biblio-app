@@ -56,7 +56,6 @@
     });
 </script>
 
-<!-- Le template reste identique -->
 <template>
     <div class="space-y-4">
         <div class="flex gap-3">

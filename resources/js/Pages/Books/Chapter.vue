@@ -1,6 +1,6 @@
 <script setup>
     import { computed } from 'vue';
-    import { Link } from '@inertiajs/vue3';
+    import { Link, router } from '@inertiajs/vue3';
     import Layout from '../../Components/Layout.vue';
     import FooterActions from '../../Components/FooterActions.vue';
 
@@ -54,7 +54,7 @@
         {
             label: 'Rechercher',
             svgIcon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
-            action: () => {/* logique de recherche */}
+            onClick: () => router.visit("/search")
         }
     ]);
 </script>

@@ -27,20 +27,6 @@
             { label: 'Recherche' }
         ];
 
-        if (props.hasContext && props.context.book) {
-            crumbs.splice(1, 0, {
-                label: props.context.book.name,
-                href: `/books/${props.context.book.id}`
-            });
-            
-            if (props.context.chapter) {
-                crumbs.splice(2, 0, {
-                    label: `Chapitre ${props.context.chapter.number}`,
-                    href: `/books/${props.context.book.id}/chapters/${props.context.chapter.id}`
-                });
-            }
-        }
-
         return crumbs;
     });
 
@@ -52,13 +38,6 @@
     });
 
     const pageSubtitle = computed(() => {
-        if (props.hasResults) {
-            const contextText = props.context.scope ? ` ${props.context.scope}` : '';
-            return `${props.totalResults} verset${props.totalResults > 1 ? 's' : ''} trouvé${props.totalResults > 1 ? 's' : ''}${contextText}`;
-        }
-        if (props.hasContext && props.context.scope) {
-            return `Recherchez des versets ${props.context.scope}`;
-        }
         return 'Trouvez des versets par mots-clés, références ou phrases';
     });
 
@@ -137,7 +116,6 @@
                 <SearchForm
                     v-model="searchQuery"
                     :loading="isSearching"
-                    :context="context"
                     :filters="selectedFilters"
                     @search="performSearch"
                     @filter-change="handleFilterChange"
@@ -176,7 +154,7 @@
             <EmptyState 
                 v-else-if="!query"
                 title="Rechercher dans les Écritures"
-                :message="hasContext && context.scope ? `Effectuez une recherche` : 'Saisissez des mots-clés, une référence ou une phrase pour commencer'">
+                :message="'Saisissez des mots-clés, une référence ou une phrase pour commencer'">
                 <template #icon>
                     <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

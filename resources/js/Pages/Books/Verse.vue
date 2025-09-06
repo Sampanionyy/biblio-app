@@ -5,6 +5,7 @@
     import { toast } from 'vue-sonner'
     import { format } from "date-fns"
     import { fr } from 'date-fns/locale';
+    import { router } from '@inertiajs/vue3';
 
     const currentDate = format(new Date(), "EEEE dd MMMM yyyy 'à' HH:mm", {
         locale: fr,
@@ -81,6 +82,13 @@
             onClick: () => handleFavorite(),
             tooltip: 'Ajouter aux favoris'
         },*/
+        {
+            key: 'search',
+            label: 'Rechercher',
+            svgIcon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+            onClick: () => router.visit("/search"),
+            tooltip: 'Rechercher dans la Bible'
+        },
         {
             key: 'copy',
             label: 'Copier',
